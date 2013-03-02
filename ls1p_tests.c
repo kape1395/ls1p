@@ -25,7 +25,7 @@ void test_command_with_args() {
     uint8_t code;
     uint16_t mref;
 
-    rc = encode_cmd(buf, &pos, LS1P_CMD_DST_ARM, LS1P_CMD_CODE_CMDLOG, 314);
+    rc = encode_cmd(buf, &pos, LS1P_ADDR_ARM, LS1P_REQ_CODE_CMDLOG, 314);
     assert(rc == LS1P_API_OK);
     assert(pos == 3);
     assert(buf[0] == 0x01);
@@ -47,8 +47,8 @@ void test_command_with_args() {
 
     rc = decode_cmd(buf, &pos, &dest, &code, &mref);
     assert(rc == LS1P_API_OK);
-    assert(dest == LS1P_CMD_DST_ARM);
-    assert(code == LS1P_CMD_CODE_CMDLOG);
+    assert(dest == LS1P_ADDR_ARM);
+    assert(code == LS1P_REQ_CODE_CMDLOG);
     assert(mref == 314);
     assert(pos == 3);
 }
@@ -59,7 +59,7 @@ void test_nonzero_dest()
     int pos = 0;
     int rc;
 
-    rc = encode_cmd(buf, &pos, LS1P_CMD_DST_ARDUINO, LS1P_CMD_CODE_VOID, 315);
+    rc = encode_cmd(buf, &pos, LS1P_ADDR_ARDUINO, LS1P_REQ_CODE_UNDEFINED, 315);
     assert(rc == LS1P_API_OK);
     assert(pos == 3);
     assert(buf[0] == 0x20);

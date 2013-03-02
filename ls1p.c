@@ -5,7 +5,7 @@
 int encode_cmd(uint8_t* buf, int* pos, uint8_t dest, uint8_t code, uint16_t mref)
 {
     *pos = 0;
-    encode_uint8(buf, pos, (dest << LS1P_CMD_CODE__BITS) | code);
+    encode_uint8(buf, pos, (dest << LS1P_CODE__BITS) | code);
     encode_uint16(buf, pos, mref);
     return LS1P_API_OK;
 }
@@ -27,7 +27,7 @@ int decode_cmd(uint8_t* buf, int* pos, uint8_t* dest, uint8_t* code, uint16_t* m
     uint8_t cmd;
     *pos = 0;
     decode_uint8(buf, pos, &cmd);
-    *dest = cmd >> LS1P_CMD_CODE__BITS;
+    *dest = cmd >> LS1P_CODE__BITS;
     *code = cmd & 0x1F;
     decode_uint16(buf, pos, mref);
     return LS1P_API_OK;
